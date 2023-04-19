@@ -12,6 +12,7 @@ class NiravEndPoint(private val greetingService: GreetingService) : NiravService
     override fun send(request: NiravRequest?, responseObserver: StreamObserver<NiravReply>?) {
         val message = greetingService.sayHello(request?.name ?: "Someone")
         val reply = NiravReply.newBuilder().setMessage(message).build()
+        println("The reply is $reply")
         responseObserver!!.onNext(reply)
         responseObserver.onCompleted()
     }
